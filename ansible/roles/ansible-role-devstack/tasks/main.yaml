@@ -1,4 +1,8 @@
 ---
+- name: Install dependencies
+  apt:
+    name: bridge-utils
+
 - name: Create the system groups
   become: true
   group:
