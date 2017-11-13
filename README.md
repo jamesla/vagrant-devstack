@@ -14,6 +14,6 @@ Create a devstack machine.
 vagrant up
 ```
 
-[http://localhost:8080/dashboard/admin] - admin/password
+http://localhost:8080/dashboard/admin - admin/password
 
 
