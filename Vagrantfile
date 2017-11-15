@@ -28,6 +28,11 @@ Vagrant.configure("2") do |config|
     vmware.vmx['ethernet0.virtualDev'] = "e1000"
   end
 
+  config.vm.provider "libvirt" do |libvirt|
+    libvirt.memory = memory
+    libvirt.cpus = cpus
+  end
+
   config.vm.provision "ansible_local", run: "always" do |ansible|
     ansible.provisioning_path = "/vagrant/ansible/"
     ansible.verbose = 'vvv'
