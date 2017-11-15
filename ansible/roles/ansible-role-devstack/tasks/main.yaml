@@ -4,6 +4,9 @@
   apt:
     name: bridge-utils
 
+- name: Use https rather than git protocol
+  shell: git config --global url."https://".insteadOf git://
+
 - name: Create the system groups
   become: true
   group:
