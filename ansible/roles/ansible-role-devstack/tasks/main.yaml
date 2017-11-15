@@ -41,3 +41,7 @@
 - name: Run stack.sh
   become: false
   command: "{{ devstack_user_home }}/devstack-repo/stack.sh"
+
+- name: Source creds for vagrant user
+  become: false
+  shell: echo source ~/devstack-repo/openrc admin admin >> ~/.bashrc
