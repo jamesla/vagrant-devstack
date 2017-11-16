@@ -2,7 +2,9 @@
 - name: Install dependencies
   become: true
   apt:
-    name: bridge-utils
+    name:
+      - bridge-utils
+      - ruby-bundler
 
 - name: Use https rather than git protocol
   shell: git config --global url."https://".insteadOf git://
@@ -38,9 +40,13 @@
     src: "local.conf.j2"
     dest: "{{ devstack_user_home }}/devstack-repo/local.conf"
 
-- name: Run stack.sh
-  become: false
-  command: "{{ devstack_user_home }}/devstack-repo/stack.sh"
+# - name: Run unstack.sh
+#   become: false
+#   command: "{{ devstack_user_home }}/devstack-repo/unstack.sh"
+
+# - name: Run stack.sh
+#   become: false
+#   command: "{{ devstack_user_home }}/devstack-repo/stack.sh"
 
 - name: Source creds for vagrant user
   become: false

@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
     libvirt.cpus = cpus
   end
 
-  config.vm.provision "ansible_local", run: "always" do |ansible|
+  config.vm.provision "ansible_local", run: "once" do |ansible|
     ansible.provisioning_path = "/vagrant/ansible/"
     ansible.verbose = 'vvv'
     ansible.install = true
@@ -22,5 +22,11 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "playbook.yml"
     ansible.sudo = true
   end
+
+  config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    cd /vagrant
+    bundle
+    rake spec
+  SHELL
 
 end

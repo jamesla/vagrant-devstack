@@ -12,4 +12,8 @@ Then browse to http://localhost:8080 using admin/password
 
 ### Reprovisioning
 
-Box is configured to reprovision on reload so if you need to change config just run vagrant reload after changing the template.
+Devstack doesn't like running stack.sh twice so if you want to make configuration file changes then:
+
+```
+vagrant destroy; vagrant up
+```
