@@ -40,14 +40,12 @@
     src: "local.conf.j2"
     dest: "{{ devstack_user_home }}/devstack-repo/local.conf"
 
-# - name: Run unstack.sh
-#   become: false
-#   command: "{{ devstack_user_home }}/devstack-repo/unstack.sh"
-
-# - name: Run stack.sh
-#   become: false
-#   command: "{{ devstack_user_home }}/devstack-repo/stack.sh"
-
 - name: Source creds for vagrant user
   become: false
   shell: echo source ~/devstack-repo/openrc admin admin >> ~/.bashrc
+    args:
+      creates: ~/.creds_sourced
+
+- name: Run stack.sh
+  become: false
+  command: "{{ devstack_user_home }}/devstack-repo/stack.sh"
