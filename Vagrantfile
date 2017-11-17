@@ -2,11 +2,12 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "generic/ubuntu1604"
+  config.vm.box = "ceph/ubuntu-xenial"
+
   memory = 10000
   cpus = 4
 
-  config.vm.synced_folder ".", "/vagrant"
+  # config.vm.synced_folder ".", "/vagrant"
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
   config.vm.provider "libvirt" do |libvirt|

@@ -10,15 +10,13 @@ HOST_IP=${HOST_IP:-{{ ansible_default_ipv4.address }}}
 ## Use MariaDB instead of mysql-server
 enable_plugin mariadb https://git.openstack.org/openstack/devstack-plugin-mariadb
 
-## Disable openstack services
-disable_service c-api c-sch c-vol # Disable Cinder services
-disable_service g-api g-reg # Disable Glance services
-disable_service n-api n-cond n-sch n-novnc n-cauth n-cpu # Disable Nova services
-disable_service q-svc q-agt q-dhcp q-l3 q-meta # Disable Neutron services
+## Disable tempest
 disable_service tempest # Disable Tempest
 
-#Enable heat services
+# Heat
+enable_plugin heat https://git.openstack.org/openstack/heat
 enable_service h-eng h-api h-api-cfn h-api-cw
 
-#Enable heat plugin
-enable_plugin heat https://git.openstack.org/openstack/heat
+# Neutron
+enable_plugin neutron-lbaas https://git.openstack.org/openstack/neutron-lbaas
+ENABLED_SERVICES+=,q-lbaasv2
