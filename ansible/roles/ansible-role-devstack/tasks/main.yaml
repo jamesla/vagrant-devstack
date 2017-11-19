@@ -1,51 +1,49 @@
 ---
-- name: Install dependencies
-  become: true
-  apt:
-    name:
-      - bridge-utils
-      - ruby-bundler
+  - name: Install dependencies
+    become: true
+    apt:
+      name:
+        - bridge-utils
+        - ruby-bundler
 
-- name: Use https rather than git protocol
-  shell: git config --global url."https://".insteadOf git://
+  - name: Use https rather than git protocol
+    shell: git config --global url."https://".insteadOf git://
 
-- name: Create the system groups
-  become: true
-  group:
-    name: "devstack"
-    state: "present"
-    system: "yes"
+  - name: Create the system groups
+    become: true
+    group:
+      name: "devstack"
+      state: "present"
+      system: "yes"
 
-- name: Create system user
-  become: true
-  user:
-    name: "{{devstack_user}}"
-    generate_ssh_key: "yes"
-    shell: "/bin/bash"
-    groups: "sudo,devstack"
-    createhome: "yes"
-    home: "{{devstack_user_home}}"
+  - name: Create system user
+    become: true
+    user:
+      name: "{{devstack_user}}"
+      generate_ssh_key: "yes"
+      shell: "/bin/bash"
+      groups: "sudo,devstack"
+      createhome: "yes"
+      home: "{{devstack_user_home}}"
 
-- name: Clone DevStack repository
-  become: false
-  git:
-    repo: "https://git.openstack.org/openstack-dev/devstack"
-    dest: "{{ devstack_user_home }}/devstack-repo"
-    version: "{{ devstack_git_branch }}"
-    force: "yes"
+  - name: Clone DevStack repository
+    become: false
+    git:
+      repo: "https://git.openstack.org/openstack-dev/devstack"
+      dest: "{{ devstack_user_home }}/devstack-repo"
+      version: "{{ devstack_git_branch }}"
+      force: "yes"
 
-- name: Drop local.conf
-  become: false
-  template:
-    src: "local.conf.j2"
-    dest: "{{ devstack_user_home }}/devstack-repo/local.conf"
+  - name: Drop local.conf
+    become: false
+    template:
+      src: "local.conf.j2"
+      dest: "{{ devstack_user_home }}/devstack-repo/local.conf"
 
-- name: Source creds for vagrant user
-  become: false
-  shell: echo source ~/devstack-repo/openrc admin admin >> ~/.bashrc
-    args:
-      creates: ~/.creds_sourced
+  - name: Source creds for vagrant user
+    become: false
+    shell: echo source ~/devstack-repo/openrc admin admin >> ~/.bashrc
 
-- name: Run stack.sh
-  become: false
-  command: "{{ devstack_user_home }}/devstack-repo/stack.sh"
+  - name: Run stack.sh
+    become: false
+    command: "{{ devstack_user_home }}/devstack-repo/stack.sh"
