@@ -1,4 +1,4 @@
 ---
-devstack_user: "ubuntu"
+devstack_user: "vagrant"
 devstack_user_home: "/home/{{devstack_user}}"
 devstack_git_branch: "master"

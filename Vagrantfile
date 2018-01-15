@@ -24,10 +24,10 @@ Vagrant.configure("2") do |config|
     ansible.sudo = true
   end
 
-  config.vm.provision "shell", privileged: false, inline: <<-SHELL
-    cd /vagrant
-    bundle
-    rake spec
-  SHELL
+  # config.vm.provision "shell", privileged: false, inline: <<-SHELL
+  #   cd /vagrant
+  #   bundle
+  #   rake spec
+  # SHELL
 
 end
