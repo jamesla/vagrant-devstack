@@ -23,11 +23,4 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "playbook.yml"
     ansible.sudo = true
   end
-
-  # config.vm.provision "shell", privileged: false, inline: <<-SHELL
-  #   cd /vagrant
-  #   bundle
-  #   rake spec
-  # SHELL
-
 end
