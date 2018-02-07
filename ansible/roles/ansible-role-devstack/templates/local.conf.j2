@@ -18,11 +18,12 @@ enable_plugin heat https://git.openstack.org/openstack/heat
 enable_service h-eng h-api h-api-cfn h-api-cw
 
 # Neutron
-enable_plugin neutron-lbaas https://git.openstack.org/openstack/neutron-lbaas
-ENABLED_SERVICES+=,q-lbaasv2
+#enable_plugin neutron-lbaas https://git.openstack.org/openstack/neutron-lbaas
+#ENABLED_SERVICES+=,q-lbaasv2
+
 FLOATING_RANGE=192.168.1.0/24
 Q_FLOATING_ALLOCATION_POOL=start=192.168.1.150,end=192.168.1.160
 Q_USE_SECGROUP=True
-IPV4_ADDRS_SAFE_TO_USE="10.0.0.0/22"
-PUBLIC_NETWORK_GATEWAY="192.168.1.1"
-PUBLIC_INTERFACE=br-ex
+IPV4_ADDRS_SAFE_TO_USE=10.0.0.0/22
+PUBLIC_NETWORK_GATEWAY=192.168.1.1
+PUBLIC_INTERFACE=eno1
