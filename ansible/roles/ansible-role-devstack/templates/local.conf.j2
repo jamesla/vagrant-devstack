@@ -13,16 +13,29 @@ enable_plugin mariadb https://git.openstack.org/openstack/devstack-plugin-mariad
 ## Disable tempest
 disable_service tempest # Disable Tempest
 
+# Load the external LBaaS plugin.
+#enable_plugin neutron-lbaas https://git.openstack.org/openstack/neutron-lbaas
+#enable_plugin octavia https://git.openstack.org/openstack/octavia
+
+# Enable LBaaS v2
+#ENABLED_SERVICES+=,q-lbaasv2
+#ENABLED_SERVICES+=,octavia,o-cw,o-hk,o-hm,o-api
+
 # Heat
 enable_plugin heat https://git.openstack.org/openstack/heat
 enable_service h-eng h-api h-api-cfn h-api-cw
 
 # Neutron
-enable_plugin neutron-lbaas https://git.openstack.org/openstack/neutron-lbaas
-ENABLED_SERVICES+=,q-lbaasv2
 FLOATING_RANGE=192.168.1.0/24
 Q_FLOATING_ALLOCATION_POOL=start=192.168.1.150,end=192.168.1.160
 Q_USE_SECGROUP=True
-IPV4_ADDRS_SAFE_TO_USE="10.0.0.0/22"
-PUBLIC_NETWORK_GATEWAY="192.168.1.1"
-PUBLIC_INTERFACE=br-ex
+IPV4_ADDRS_SAFE_TO_USE=10.0.0.0/22
+PUBLIC_NETWORK_GATEWAY=192.168.1.1
+PUBLIC_INTERFACE=eno1
+
+# Open vSwitch provider networking configuration
+Q_USE_PROVIDERNET_FOR_PUBLIC=True
+OVS_PHYSICAL_BRIDGE=br-ex
+PUBLIC_BRIDGE=br-ex
+OVS_BRIDGE_MAPPINGS=public:br-ex
+
